@@ -1,7 +1,7 @@
 {
   "name": "devcote/pathfinder_esi_public",
   "description": "ESI API library for Pathfinder",
-  "type": "library",
+  "type": "projec",
   "homepage": "https://github.com/devCote/pathfinder_esi",
   "minimum-stability": "stable",
   "license": "MIT",
