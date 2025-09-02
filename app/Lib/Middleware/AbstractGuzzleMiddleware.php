@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Exodus 4D
@@ -8,13 +9,12 @@
 
 namespace Exodus4D\ESI\Lib\Middleware;
 
-
 use Cache\Adapter\Void\VoidCachePool;
 use Psr\Cache\CacheItemPoolInterface;
 use Psr\Http\Message\RequestInterface;
 
-abstract class AbstractGuzzleMiddleware {
-
+abstract class AbstractGuzzleMiddleware
+{
     /**
      * @var null|\Closure
      */
@@ -24,8 +24,9 @@ abstract class AbstractGuzzleMiddleware {
      * @param RequestInterface $request
      * @param array $options
      */
-    public function __invoke(RequestInterface $request, array $options){
-        if(is_callable($options['get_cache_pool'])){
+    public function __invoke(RequestInterface $request, array $options)
+    {
+        if (is_callable($options['get_cache_pool'])) {
             $this->getCachePool = $options['get_cache_pool'];
         }
     }
@@ -34,11 +35,12 @@ abstract class AbstractGuzzleMiddleware {
      * get PSR-6 CachePool instance
      * @return CacheItemPoolInterface
      */
-    protected function cache() : CacheItemPoolInterface {
-        if(!is_null($this->getCachePool)){
+    protected function cache(): CacheItemPoolInterface
+    {
+        if (!is_null($this->getCachePool)) {
             // return should be a full working PSR-6 Cache pool instance
             return ($this->getCachePool)();
-        }else{
+        } else {
             // no Cache pool provided -> use default "void" Cache Pool
             // -> no storage at all! Dummy PSR-6
             return new VoidCachePool();
@@ -52,7 +54,8 @@ abstract class AbstractGuzzleMiddleware {
      * @param string $tag
      * @return string
      */
-    protected function cacheKeyFromRequestUrl(RequestInterface $request, string $tag = '') : string {
+    protected function cacheKeyFromRequestUrl(RequestInterface $request, string $tag = ''): string
+    {
         return $this->cacheKeyFromUrl($request->getUri()->__toString(), $tag);
     }
 
@@ -64,7 +67,8 @@ abstract class AbstractGuzzleMiddleware {
      * @param string $url
      * @return string
      */
-    protected function cacheKeyFromUrl(string $url, string $tag = '') : string {
+    protected function cacheKeyFromUrl(string $url, string $tag = ''): string
+    {
         return $this->hashKey($this->getNormalizedUrl($url) . $tag);
     }
 
@@ -73,7 +77,8 @@ abstract class AbstractGuzzleMiddleware {
      * @param string $url
      * @return string
      */
-    protected function getNormalizedUrl(string $url) : string {
+    protected function getNormalizedUrl(string $url): string
+    {
         $urlParts = parse_url($url);
         $urlParts['path'] = preg_replace('/\/(\d+)\//', '/x/', $urlParts['path']);
         return $urlParts['scheme'] . '://' . $urlParts['host'] . $urlParts['path'];
@@ -85,7 +90,9 @@ abstract class AbstractGuzzleMiddleware {
      * @param string $key
      * @return string
      */
-    protected function hashKey(string $key) : string {
+    protected function hashKey(string $key): string
+    {
         return sha1($key);
     }
 }
+

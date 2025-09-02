@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: Exodus4D
@@ -8,8 +9,8 @@
 
 namespace Exodus4D\ESI\Client;
 
-interface ApiInterface {
-
+interface ApiInterface
+{
     /**
      * ApiInterface constructor.
      * @param string $url
@@ -174,32 +175,32 @@ interface ApiInterface {
     /**
      * @return string
      */
-    public function getUrl() : string;
+    public function getUrl(): string;
 
     /**
      * @return string
      */
-    public function getAcceptType() : string;
+    public function getAcceptType(): string;
 
     /**
      * @return float
      */
-    public function getTimeout() : float;
+    public function getTimeout(): float;
 
     /**
      * @return float
      */
-    public function getConnectTimeout() : float;
+    public function getConnectTimeout(): float;
 
     /**
      * @return float
      */
-    public function getReadTimeout() : float;
+    public function getReadTimeout(): float;
 
     /**
      * @return int
      */
-    public function getBatchConcurrency() : int;
+    public function getBatchConcurrency(): int;
 
     /**
      * @return mixed
@@ -214,7 +215,7 @@ interface ApiInterface {
     /**
      * @return bool
      */
-    public function getVerify() : bool;
+    public function getVerify(): bool;
 
     /**
      * @return bool|resource
@@ -224,22 +225,22 @@ interface ApiInterface {
     /**
      * @return int
      */
-    public function getDebugLevel() : int;
+    public function getDebugLevel(): int;
 
     /**
      * @return string
      */
-    public function getUserAgent() : string;
+    public function getUserAgent(): string;
 
     /**
      * @return \Closure|null
      */
-    public function getCachePool() : ?\Closure;
+    public function getCachePool(): ?\Closure;
 
     /**
      * @return \Closure|null
      */
-    public function getNewLog() : ?\Closure;
+    public function getNewLog(): ?\Closure;
 
     /**
      * @param string $requestHandler
@@ -252,5 +253,6 @@ interface ApiInterface {
      * @param array $configs
      * @return array
      */
-    public function sendBatch(array $configs) : array;
+    public function sendBatch(array $configs): array;
 }
+
